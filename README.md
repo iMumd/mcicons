@@ -1,5 +1,3 @@
-# MCicons
-
 <img src="docs/wordmark.svg" alt="MCicons pixel wordmark" width="258">
 
 Minecraft inventory icons for websites, dashboards and server tools. Use a
