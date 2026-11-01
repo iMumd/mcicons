@@ -1,0 +1,27 @@
+{
+  "name": "@imumd/mcicons",
+  "version": "2.0.0",
+  "description": "Versioned Minecraft inventory icons with CSS, direct PNG assets and subset tooling.",
+  "type": "module",
+  "license": "SEE LICENSE IN LICENSE",
+  "repository": { "type": "git", "url": "https://github.com/iMumd/mcicons.git" },
+  "homepage": "https://mcicons.mumd.dev",
+  "author": "iMumd <hi@mumd.dev>",
+  "engines": { "node": ">=22" },
+  "files": ["dist", "src/index.mjs", "src/index.d.ts", "bin", "LICENSE", "ASSET-NOTICE.md", "README.md"],
+  "exports": {
+    ".": { "types": "./src/index.d.ts", "import": "./src/index.mjs" },
+    "./css/core.css": "./dist/css/core.css",
+    "./css/all.css": "./dist/css/all.css",
+    "./css/icons/*": "./dist/css/icons/*",
+    "./icons/*": "./dist/icons/*",
+    "./manifest.json": "./dist/manifest.json"
+  },
+  "bin": { "mcicons": "bin/mcicons.mjs" },
+  "sideEffects": ["**/*.css"],
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "test": "node tools/build.mjs && node --test",
+    "prepack": "node tools/build.mjs"
+  }
+}

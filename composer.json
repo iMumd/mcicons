@@ -1,16 +1,17 @@
 {
     "name": "themuhamed/mcicons",
-    "description": "A Minecraft UI icon library for Laravel and web UI.",
+    "description": "Versioned Minecraft inventory icons with lightweight CSS and optional Laravel asset publishing.",
     "type": "library",
     "license": "MIT",
-    "version": "1.0.0",
+    "homepage": "https://mcicons.mumd.dev",
+    "authors": [{ "name": "iMumd", "email": "hi@mumd.dev", "homepage": "https://github.com/iMumd" }],
+    "require": { "php": ">=8.1" },
+    "suggest": { "illuminate/support": "Required for Laravel integration; supplied by a Laravel application." },
     "autoload": {
         "psr-4": {
             "Themuhamed\\Mcicons\\": "src/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "extra": {
         "laravel": {
             "providers": [

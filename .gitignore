@@ -1,0 +1,10 @@
+node_modules/
+vendor/
+dist/
+*.tgz
+*.zip
+*.jar
+__pycache__/
+.env
+.env.*
+!.env.example
