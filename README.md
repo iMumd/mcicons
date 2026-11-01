@@ -1,129 +1,87 @@
-<div align="center">
-    <h2>🌐 Official Website – <a href="https://mcicons.dev" target="_blank">mcicons.dev</a></h2>
-    <p>Explore all icons, try live previews, use the CDN, and more!</p>
-    <a href="https://mcicons.dev">
-        <img src="https://mcicons.dev/img/mcicons.png" alt="McIcons Logo" width="300px"/>
-    </a>
-    <p align="center">
-        <a href="https://mcicons.dev" style="text-decoration: none;">
-            <img src="https://img.shields.io/badge/Visit-Site-green?style=for-the-badge&logo=google-chrome" alt="Visit Site">
-        </a>
-    </p>
-</div>
+<img src="docs/wordmark.svg" alt="MCicons pixel wordmark" width="258">
 
-<p align="center">
-    <a href="https://github.com/themuhamed/mcicons"><img src="https://img.shields.io/github/v/release/themuhamed/mcicons?style=flat-square" alt="Latest Release"></a>
-    <a href="https://github.com/themuhamed/mcicons"><img src="https://img.shields.io/github/repo-size/themuhamed/mcicons?style=flat-square" alt="Repo Size"></a>
-    <a href="https://github.com/themuhamed/mcicons/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License"></a>
-    <a href="https://packagist.org/packages/themuhamed/mcicons"><img src="https://img.shields.io/packagist/dt/themuhamed/mcicons?style=flat-square" alt="Packagist Downloads"></a>
-</p>
+Minecraft inventory icons for websites, dashboards and server tools. Use a
+single PNG, CSS classes, or a subset containing only the icons your project needs.
 
-<h1 align="center">McIcons – Minecraft UI Icon Library</h1>
+[Browse icons](https://mcicons.mumd.dev/icons) · [Setup](docs/USAGE.md) ·
+[Asset provenance](docs/ASSETS.md) · [Contributing](CONTRIBUTING.md)
 
-<p align="center">
-    A handcrafted icon system for the Minecraft aesthetic.<br/>
-    Over 1300+ pixel-style PNG icons, pure CSS integration, and CDN support for any PHP, Laravel, or web project.
-</p>
+## Version 2
 
----
+**1,659 icons**, including **263 additions** from the hash-verified Java **26.3**
+client. All 1,658 current item identifiers have an asset, plus one retained
+compatibility identifier. Original 1.0 artwork remains unchanged; new previews
+use a deterministic software renderer, not a pixel-identical game renderer.
 
-## 🚀 Installation
+## Quick start
 
-```bash
-composer require themuhamed/mcicons
-```
-
-Then publish the assets in Laravel:
-
-```bash
-php artisan vendor:publish --tag=mcicons-assets
-```
-
-Or copy manually:
-
-```bash
-mkdir -p public/vendor/mcicons
-cp -r vendor/themuhamed/mcicons/resources/css/mcicons.css public/vendor/mcicons/
-cp -r vendor/themuhamed/mcicons/public/icons public/vendor/mcicons/
-```
-
----
-
-## 🌐 CDN (Recommended)
-
-Add this line to your `<head>` tag to use McIcons via CDN:
+Load the version-pinned stylesheet:
 
 ```html
-<link rel="stylesheet" href="https://cdn.mcicons.dev/releases/v1.0.0/css/all.css">
+<link rel="stylesheet"
+      href="https://mcicons.mumd.dev/releases/v2.0.0/css/all.css">
+<i class="mc mc-copper-sword mc-xl" aria-hidden="true"></i>
 ```
 
-Then use icons like this:
+For a meaningful standalone icon, use an accessible image directly—no CSS or
+JavaScript required:
 
 ```html
-<i class="mc mc-diamond-sword mc-2xl"></i>
-<i class="mc mc-anvil mc-xl"></i>
-<i class="mc mc-apple mc-sm"></i>
+<img src="https://mcicons.mumd.dev/releases/v2.0.0/icons/minecraft_copper_sword.png"
+     width="32" height="32" alt="Copper sword">
 ```
 
----
+## Choose your payload
 
-## 📂 Structure
+- **Direct PNG:** one requested image, no library runtime.
+- **Selective CSS:** `core.css` plus individual `css/icons/<name>.css` files.
+- **Subset CLI:** export only selected images and their stylesheet.
+- **Full CSS:** approximately 15.5 KiB gzip; browsers fetch images for used
+  selectors, not the entire catalog. Core CSS is approximately 0.5 KiB gzip.
 
-```
+The ESM helper is under 1 KiB uncompressed. No runtime dependencies, icon font,
+embedded sprite sheet or framework runtime is required by the library. See
+[setup and size examples](docs/USAGE.md), including React, TypeScript and Laravel.
+
+## Project structure
+
+```text
 mcicons/
-├── public/icons/           # 1300+ PNGs
-├── resources/css/          # mcicons.css
-├── src/                    # Laravel ServiceProvider
-├── composer.json
-└── README.md
+├── .github/workflows/   # Validation on Windows/Linux and PHP
+├── bin/                # Safe subset CLI
+├── data/               # Official source hashes, IDs and retained legacy list
+├── docs/               # Usage, provenance and release procedures
+├── public/icons/       # 64 × 64 PNG assets
+├── resources/css/      # Core and Laravel-compatible generated CSS
+├── src/                # Typed ESM helpers and Laravel service provider
+├── tests/              # Asset, CSS, API, CLI and publishing-contract checks
+├── tools/              # Deterministic asset importer and package builder
+├── ASSET-NOTICE.md     # Minecraft artwork attribution and rights boundary
+├── composer.json       # Existing Composer package identity retained
+└── package.json        # ESM package and build/test commands
 ```
 
----
+`dist/` is generated by `npm run build`; it contains `css/`, `icons/`, the
+catalog/manifest, integrity metadata and license notices. No game JAR is shipped.
 
-## 📏 Icon Sizes
+## Development
 
-| Class       | Size     |
-|-------------|----------|
-| `.mc-sm`    | 1rem     |
-| `.mc`       | 1.5rem   |
-| `.mc-xl`    | 2rem     |
-| `.mc-2xl`   | 2.5rem   |
-| `.mc-3xl`   | 3rem     |
-| `.mc-4xl`   | 4rem     |
-| `.mc-5xl`   | 5rem     |
+```sh
+npm ci
+npm test
+php tests/provider.php
+```
 
----
+Node 22+ is used for development; PHP 8.1+ is needed only for PHP integration.
+Asset regeneration additionally requires Python and `requirements-assets.txt`.
+Small, tested PRs are welcome. Historical `mc-*` classes and the
+`themuhamed/mcicons` Composer identity remain compatible.
 
-## 🖥️ Official Website
+## License and contact
 
-👉 Visit [https://mcicons.dev](https://mcicons.dev) for:
-- Icon browser
-- Live previews
-- CDN access
-- Usage instructions
-- Ready-to-copy code
+Software and documentation: [MIT](LICENSE). Minecraft artwork is **not**
+relicensed under MIT; read [ASSET-NOTICE.md](ASSET-NOTICE.md). This is an
+independent project, not an official Minecraft product.
 
----
-
-## 🧑‍💻 Author
-
-Developed by [Muhamed](https://github.com/themuhamed)  
-📧 [juniorhmd@pm.com](mailto:juniorhmd@pm.com)
-
----
-
-## 📦 Coming Soon
-
-- NPM package support
-
----
-
-## 📄 License
-
-McIcons is open-source and licensed under the [MIT License](https://opensource.org/licenses/MIT).
-
----
-
-<p align="center">
-   <strong>If you love McIcons, star it on GitHub ⭐</strong>
-</p>
+[GitHub](https://github.com/iMumd) · [hi@mumd.dev](mailto:hi@mumd.dev) ·
+[Telegram](https://t.me/Mumdthoughts)
