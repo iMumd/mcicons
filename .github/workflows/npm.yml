@@ -1,0 +1,31 @@
+name: Publish to npm (configured trusted publisher required)
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Existing reviewed release tag, for example v2.1.0'
+        required: true
+        type: string
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.version }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - name: Verify requested release version
+        env:
+          RELEASE_TAG: ${{ inputs.version }}
+        run: node --input-type=module -e "import fs from 'node:fs';const p=JSON.parse(fs.readFileSync('package.json'));if(!/^v\d+\.\d+\.\d+$/.test(process.env.RELEASE_TAG)||process.env.RELEASE_TAG!=='v'+p.version)process.exit(1)"
+      - run: npm ci
+      - run: npm test
+      - run: npm publish --provenance --access public
