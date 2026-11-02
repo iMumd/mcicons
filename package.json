@@ -1,27 +1,89 @@
 {
   "name": "@imumd/mcicons",
-  "version": "2.0.0",
-  "description": "Versioned Minecraft inventory icons with CSS, direct PNG assets and subset tooling.",
+  "version": "2.1.0",
+  "description": "Minecraft pixel icons: local CSS classes, lossless SVG, tree-shakeable definitions and React.",
   "type": "module",
   "license": "SEE LICENSE IN LICENSE",
-  "repository": { "type": "git", "url": "https://github.com/iMumd/mcicons.git" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iMumd/mcicons.git"
+  },
   "homepage": "https://mcicons.mumd.dev",
   "author": "iMumd <hi@mumd.dev>",
-  "engines": { "node": ">=22" },
-  "files": ["dist", "src/index.mjs", "src/index.d.ts", "bin", "LICENSE", "ASSET-NOTICE.md", "README.md"],
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "dist",
+    "src/*.mjs",
+    "src/*.d.ts",
+    "bin",
+    "LICENSE",
+    "ASSET-NOTICE.md",
+    "README.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "docs/*.md",
+    "docs/wordmark.svg"
+  ],
   "exports": {
-    ".": { "types": "./src/index.d.ts", "import": "./src/index.mjs" },
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.mjs"
+    },
+    "./svg": {
+      "types": "./src/svg.d.ts",
+      "import": "./src/svg.mjs"
+    },
+    "./react": {
+      "types": "./src/react.d.ts",
+      "import": "./src/react.mjs"
+    },
+    "./definitions/*": {
+      "types": "./dist/definitions/*.d.ts",
+      "import": "./dist/definitions/*.mjs"
+    },
+    "./svg/*": "./dist/svg/*",
+    "./css/svg.css": "./dist/css/svg.css",
+    "./css/svg/*": "./dist/css/svg/*",
     "./css/core.css": "./dist/css/core.css",
     "./css/all.css": "./dist/css/all.css",
     "./css/icons/*": "./dist/css/icons/*",
     "./icons/*": "./dist/icons/*",
     "./manifest.json": "./dist/manifest.json"
   },
-  "bin": { "mcicons": "bin/mcicons.mjs" },
-  "sideEffects": ["**/*.css"],
+  "bin": {
+    "mcicons": "bin/mcicons.mjs"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
   "scripts": {
     "build": "node tools/build.mjs",
-    "test": "node tools/build.mjs && node --test",
+    "test": "node tools/build.mjs && node --test tests/library.test.mjs tests/vector.test.mjs && tsc --noEmit --strict --module nodenext --target es2022 --jsx react-jsx tests/types.tsx",
     "prepack": "node tools/build.mjs"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "esbuild": "^0.28.2",
+    "linkedom": "^0.18.15",
+    "pngjs": "^7.0.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "typescript": "^7.0.2"
   }
 }

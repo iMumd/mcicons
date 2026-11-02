@@ -1,5 +1,6 @@
 /* MCicons: no font, JavaScript, data URI or eager sprite download required. */
 .mc{--mc-size:1.5rem;display:inline-block;flex-shrink:0;width:var(--mc-size);height:var(--mc-size);vertical-align:-.15em;background-image:var(--mc-icon);background-size:contain;background-repeat:no-repeat;background-position:center;image-rendering:pixelated}
+svg.mc{background-image:none}
 .mc-sm{--mc-size:1rem}.mc-xl{--mc-size:2rem}.mc-2xl{--mc-size:2.5rem}.mc-3xl{--mc-size:3rem}.mc-4xl{--mc-size:4rem}.mc-5xl{--mc-size:5rem}.mc-inline{--mc-size:1em}
 .mc-spin{animation:mc-spin 2s linear infinite}@keyframes mc-spin{to{transform:rotate(360deg)}}
 .mc-flip-horizontal{transform:scaleX(-1)}.mc-flip-vertical{transform:scaleY(-1)}.mc-rotate-90{transform:rotate(90deg)}.mc-rotate-180{transform:rotate(180deg)}.mc-rotate-270{transform:rotate(270deg)}
