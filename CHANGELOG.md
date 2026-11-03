@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.1.1
+
+- Fix standalone selective PNG/SVG stylesheets: bind background-image in the
+  declaring stylesheet so relative custom-property URLs resolve correctly when
+  linked beside core.css without a bundler. Full CSS and embedded kits are
+  unchanged. Existing 2.1.0 artifacts are not overwritten.
+- Add browser regression coverage decoding the actual selective SVG and PNG.
+
 ## 2.1.0
 
 - Add 1,659 genuine, lossless multicolor SVGs and individually importable typed

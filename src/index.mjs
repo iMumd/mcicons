@@ -1,4 +1,4 @@
-export const version = '2.1.0';
+export const version = '2.1.1';
 export const defaultBase = `https://mcicons.mumd.dev/releases/v${version}/icons/`;
 
 export function iconUrl(name, base = defaultBase) {

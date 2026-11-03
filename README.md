@@ -12,7 +12,7 @@ No icon font. No mandatory CDN. No runtime dependencies in the core package.
 ## Install
 
 ```sh
-npm install https://github.com/iMumd/mcicons/releases/download/v2.1.0/mcicons-2.1.0.tgz
+npm install https://github.com/iMumd/mcicons/releases/download/v2.1.1/mcicons-2.1.1.tgz
 ```
 
 The installed package is `@imumd/mcicons`. This is the public GitHub release

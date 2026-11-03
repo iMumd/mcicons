@@ -45,7 +45,7 @@ The examples below remain supported; SVG does not break old integrations.
 Pin a release rather than a mutable `latest` URL:
 
 ```html
-<link rel="stylesheet" href="https://mcicons.mumd.dev/releases/v2.1.0/css/all.css">
+<link rel="stylesheet" href="https://mcicons.mumd.dev/releases/v2.1.1/css/all.css">
 <button><i class="mc mc-diamond mc-sm" aria-hidden="true"></i> Balance</button>
 ```
 
@@ -72,7 +72,7 @@ accessible name. Fixed dimensions prevent image-loading layout shifts.
 ## npm-compatible release package
 
 ```sh
-npm install https://github.com/iMumd/mcicons/releases/download/v2.1.0/mcicons-2.1.0.tgz
+npm install https://github.com/iMumd/mcicons/releases/download/v2.1.1/mcicons-2.1.1.tgz
 ```
 
 This installs the scoped package from the versioned GitHub artifact. The scope

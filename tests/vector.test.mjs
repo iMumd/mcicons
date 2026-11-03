@@ -46,6 +46,7 @@ test('all 1,659 SVG definitions preserve every nontransparent source pixel exact
     assert.equal(svg, vectorSvg(vectorize(bytes, item.name)));
     assert.equal(createHash('sha256').update(svg).digest('hex'), item.svgSha256);
     assert.doesNotMatch(svg, /<image|<script|foreignObject|href=|data:/);
+    assert.match(await fs.readFile(new URL('../dist/css/svg/' + item.name + '.css', import.meta.url), 'utf8'), /background-image:var\(--mc-icon\)/);
   }
 });
 test('SVG rasterization matches PNG on light and dark backgrounds', async () => {
