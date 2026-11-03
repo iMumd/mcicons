@@ -24,8 +24,18 @@ try {
   const chosen = names.map((name) => { const item = manifest.items.find((entry) => entry.name === name); if (!item) throw new Error('Unknown icon: '+name); return item; });
   const output = path.resolve(value('--out'));
   if (output === root || output === path.parse(output).root) throw new Error('Use a dedicated subset output directory');
-  // Never silently replace an existing directory or user files.
-  await fs.mkdir(output);
+  // Create any missing parent directories, but never silently replace an
+  // existing output directory or the user's files.
+  await fs.mkdir(path.dirname(output), { recursive: true });
+  try {
+    await fs.mkdir(output);
+  } catch (error) {
+    throw new Error(
+      error.code === 'EEXIST'
+        ? `Output directory already exists: ${output}. Choose a new path; existing files are never overwritten.`
+        : error.message,
+    );
+  }
   const rules = [];
   if (!embed) await fs.mkdir(path.join(output, 'icons'));
   for (const item of chosen) {
