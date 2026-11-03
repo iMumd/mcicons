@@ -106,4 +106,7 @@ test('single-definition bundles exclude the catalog and stay inside an explicit 
   assert.equal(inputs.filter(name => name.includes('definitions/')).length, 1);
   assert.ok(!inputs.some(name => /manifest|catalog|react/.test(name)));
   assert.ok((await fs.stat(new URL('../src/svg.mjs', import.meta.url))).size < 4000);
+  const catalog = await fs.readFile(new URL('../dist/catalog.json', import.meta.url));
+  assert.ok(gzipSync(catalog).length < 60000);
+  assert.ok(JSON.parse(catalog).items.every(item => !('sha256' in item) && !('svgSha256' in item)));
 });

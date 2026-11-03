@@ -61,7 +61,7 @@ await fs.writeFile(path.join(root, 'resources/css/mcicons.css'), core+'\n'+legac
 const manifest = { version: pkg.version, minecraft: source.minecraft, count: items.length, added: imported.size,
   coverage: { current: covered, official: official.size, retained: items.length-covered }, items };
 await fs.writeFile(path.join(output, 'manifest.json'), JSON.stringify(manifest)+'\n');
-await fs.writeFile(path.join(output, 'catalog.json'), JSON.stringify({ ...manifest, items: items.map(({ sha256, ...item }) => item) })+'\n');
+await fs.writeFile(path.join(output, 'catalog.json'), JSON.stringify({ ...manifest, items: items.map(({ sha256, svgSha256, svgBytes, svgGzipBytes, ...item }) => item) })+'\n');
 await fs.writeFile(path.join(root, 'src/index.d.ts'), `export type IconName = ${items.map((item) => JSON.stringify(item.name)).join(' | ')};\nexport type IconSize = 'sm' | 'md' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';\nexport declare const version: string;\nexport declare const defaultBase: string;\nexport declare function iconUrl(name: IconName, base?: string): string;\nexport declare function iconClass(name: IconName, size?: IconSize): string;\n`);
 const integrity = {};
 for (const file of ['css/core.css', 'css/all.css', 'css/svg.css', 'manifest.json', 'catalog.json']) {
