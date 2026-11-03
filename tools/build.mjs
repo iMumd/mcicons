@@ -47,10 +47,11 @@ for (const file of (await fs.readdir(path.join(root, 'public/icons'))).filter((n
   await fs.writeFile(path.join(output, 'definitions', name + '.mjs'), `export default ${JSON.stringify(definition)};\n`);
   await fs.writeFile(path.join(output, 'definitions', name + '.d.ts'), "import type { IconDefinition } from '@imumd/mcicons/svg';\ndeclare const icon: IconDefinition;\nexport default icon;\n");
   svgClasses.push(`.mc-${name}{--mc-icon:url('../svg/${svgFile}')}`);
-  await fs.writeFile(path.join(output, 'css/svg', name + '.css'), `.mc-${name}{--mc-icon:url('../../svg/${svgFile}')}\n`);
+  // Resolve custom-property URLs where declared, not in core.css's directory.
+  await fs.writeFile(path.join(output, 'css/svg', name + '.css'), `.mc-${name}{--mc-icon:url('../../svg/${svgFile}');background-image:var(--mc-icon)}\n`);
   classes.push(`.mc-${name}{--mc-icon:url('../icons/${file}')}`);
   legacy.push(`.mc-${name}{--mc-icon:url('icons/${file}')}`);
-  await fs.writeFile(path.join(output, 'css/icons', name+'.css'), `.mc-${name}{--mc-icon:url('../../icons/${file}')}\n`);
+  await fs.writeFile(path.join(output, 'css/icons', name+'.css'), `.mc-${name}{--mc-icon:url('../../icons/${file}');background-image:var(--mc-icon)}\n`);
 }
 const covered = items.filter((item) => item.current).length;
 if (covered !== official.size) throw new Error(`Current item coverage incomplete: ${covered}/${official.size}`);

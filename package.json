@@ -1,6 +1,6 @@
 {
   "name": "@imumd/mcicons",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Minecraft pixel icons: local CSS classes, lossless SVG, tree-shakeable definitions and React.",
   "type": "module",
   "license": "SEE LICENSE IN LICENSE",

@@ -35,6 +35,7 @@ test('all stylesheets use relocatable existing PNG files and preserve legacy cla
     assert.ok(all.includes(`.mc-${item.name}{`)); assert.ok(legacy.includes(`url('icons/${item.file}')`));
     const single = await fs.readFile(new URL('../dist/css/icons/'+item.name+'.css', import.meta.url),'utf8');
     assert.ok(single.includes(`../../icons/${item.file}`));
+    assert.ok(single.includes('background-image:var(--mc-icon)'));
   }
   assert.equal(/url\(['"]?\//.test(all), false); assert.equal(/@font-face|data:image/.test(all), false);
 });
