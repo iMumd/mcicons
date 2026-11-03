@@ -18,3 +18,20 @@
 The original `v1.0.0` tag remains intact. Its display title can be cleaned up;
 that must not rewrite Git history or alter old release source archives.
 Infrastructure credentials and private deployment helpers do not belong here.
+
+## npm registry activation
+
+The GitHub tarball is installable today without registry credentials. Registry
+publication is a separate step and must never be implied by the package scope.
+The maintainer must own the `@imumd` scope, bootstrap its npm package if required,
+and configure an npm trusted publisher for `iMumd/mcicons`, workflow `npm.yml`,
+environment `npm`. Configure approval protection on the GitHub `npm` environment.
+Then dispatch the workflow with the reviewed release tag. It validates version,
+runs tests and publishes with OIDC provenance, not a committed access token.
+Confirm `npm view @imumd/mcicons@X.Y.Z version dist.integrity` before documenting
+`npm install @imumd/mcicons` as available. If bootstrap authentication or npm
+account policy is missing, leave the release tarball as the working install path.
+
+The build requires `npm ci` in the source repository (PNG decoder is build-only).
+Release output now also includes `svg/`, `definitions/`, `css/svg.css`, selective
+`css/svg/` and `metrics.json`. The published package needs no postinstall build.

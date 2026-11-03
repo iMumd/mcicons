@@ -1,11 +1,51 @@
 # Using MCicons
 
+## Local-first SVG (2.1+)
+
+Install the [versioned package](../README.md#install). The recommended CSS-only
+setup imports `@imumd/mcicons/css/core.css` and only the required
+`@imumd/mcicons/css/svg/<name>.css` files. Use existing `mc mc-<name>` classes.
+Your bundler copies SVGs into your deployment; no connection to MCicons is
+required at runtime. `css/svg.css` includes all selectors when you need them.
+
+For zero separate image requests:
+
+```sh
+npx --no-install mcicons subset --icons diamond,copper-sword --format svg --embed --out ./my-icons
+```
+
+Copy `mcicons.css` and the notices to your app. Embedded SVG backgrounds require
+`img-src data:` in CSP. Without `--embed`, output contains local SVG files under
+`icons/`; legacy PNG subsets remain the default for backward compatibility.
+
+For React, import `Icon` from `@imumd/mcicons/react` and an individual default
+definition from `@imumd/mcicons/definitions/diamond`. Pass it as `<Icon icon={diamond}
+size={32} title="Diamond" />`. React 18+ is an optional peer. The component
+renders accessible inline SVG on the server and client without fetching images.
+
+Vanilla/SSR users can import `iconSvg` and `mountIcons` from
+`@imumd/mcicons/svg`. `iconSvg(definition, {title, size, className})` serializes
+trusted imported definitions with escaped text. `mountIcons([definition], root)`
+replaces matching `.mc.mc-<name>` placeholders once, preserves data/ARIA/style
+attributes and does not install a watcher or copy inline event attributes.
+Attach listeners after replacement; DOM listeners on replaced nodes are not
+retained. Unknown icons are left unchanged. Use CSS core for class sizing.
+
+Standalone SVGs live at `svg/minecraft_<id>.svg`. These contain real paths,
+including original color/alpha. They are multicolor pixel art, not monochrome
+`currentColor` glyphs. All 1,659 definitions are tested against the original
+pixels. Some SVGs are larger than PNG: see `metrics.json` and use subsets.
+
+## Legacy-compatible PNG delivery
+
+The examples below remain supported; SVG does not break old integrations.
+
 ## CDN
 
 Pin a release rather than a mutable `latest` URL:
 
 ```html
-<link rel="stylesheet" href="https://mcicons.mumd.dev/releases/v2.0.0/css/all.css">
+<link rel="stylesheet" href="https://mcicons.mumd.dev/releases/v2.1.0/css/all.css">
 <button><i class="mc mc-diamond mc-sm" aria-hidden="true"></i> Balance</button>
 ```
 
@@ -32,7 +72,7 @@ accessible name. Fixed dimensions prevent image-loading layout shifts.
 ## npm-compatible release package
 
 ```sh
-npm install https://github.com/iMumd/mcicons/releases/download/v2.0.0/mcicons-2.0.0.tgz
+npm install https://github.com/iMumd/mcicons/releases/download/v2.1.0/mcicons-2.1.0.tgz
 ```
 
 This installs the scoped package from the versioned GitHub artifact. The scope
