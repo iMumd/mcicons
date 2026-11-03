@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.1.0
+
+- Add 1,659 genuine, lossless multicolor SVGs and individually importable typed
+  definitions. Preserve every nontransparent source pixel and alpha value.
+- Add optional SSR-safe React and vanilla SVG entry points; no core runtime
+  dependencies, automatic observers or mandatory CDN requests.
+- Add selective SVG CSS and safe `subset --format svg --embed` offline kits.
+- Preserve PNG URLs, CSS classes, helper APIs and Composer/Laravel integration.
+- Add pixel/raster/SSR/type/bundle tests, payload metrics, local-first guidance
+  and an explicit npm trusted-publishing workflow. Registry credentials/config
+  are still required; GitHub package artifacts are the verified install path.
+
 ## 2.0.0
 
 MCicons resumes active maintenance with a reproducible asset and release pipeline.
